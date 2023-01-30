@@ -37,8 +37,9 @@ public class AgeCalculatorServlet extends HttpServlet {
             nextAge++;
             request.setAttribute("popmsg", "Your age next birthday will be " + nextAge);
         } catch (NumberFormatException e) {
-            
+
             request.setAttribute("popmsg", "You must give a number.");
+            getServletContext().getRequestDispatcher("/WEB-INF/ageCalculator.jsp").forward(request, response);
             return;
         }
 
