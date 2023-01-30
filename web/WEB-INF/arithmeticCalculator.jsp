@@ -14,9 +14,9 @@
     <body>
         <h1>Arithmetic Calculator</h1>
         <form action="arithmetic" method="post">
-            First: <input type="text" name="firstnum">
+            First: <input type="text" name="firstnum" value="${firstnum}">
             <br>
-            Second: <input type="text" name="secondnum">
+            Second: <input type="text" name="secondnum" value="${secondnum}">
             <br>
             <input type="submit" name="submit" value="+">
             <input type="submit" name="submit" value="-">
@@ -25,7 +25,7 @@
             <br>
             <br>
         </form>
-        <div>Result: ${showResult}</div>
+        <div>Result: ${result}</div>
         <a href="age">Age Calculator</a>
     </body>
 </html>
