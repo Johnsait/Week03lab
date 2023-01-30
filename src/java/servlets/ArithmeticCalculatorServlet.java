@@ -38,31 +38,40 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         request.setAttribute("firstnum", firstnum);
         request.setAttribute("secondnum", secondnum);
 
-        if (firstnum == null || firstnum.equals("")
-                || secondnum == null || secondnum.equals("")) {
-            request.setAttribute("result", "Invalid");
-            
-        } else {
-            int parsedfirstnum = Integer.parseInt(firstnum);
-            int parsedsecondnum = Integer.parseInt(secondnum);
-            int result = 0;
-            switch (request.getParameter("submit")) {
-                case "+":
-                    result = parsedfirstnum + parsedsecondnum;
-                    break;
-                case "-":
-                    result = parsedfirstnum - parsedsecondnum;
-                    break;
-                case "*":
-                    result = parsedfirstnum * parsedsecondnum;
-                    break;
-                case "%":
-                    result = parsedfirstnum % parsedsecondnum;
-                    break;
+        try {
+            if (firstnum == null || firstnum.equals("")
+                    || secondnum == null || secondnum.equals("")) {
+                request.setAttribute("result", "invalid");
+
+            } else {
+                int parsedfirstnum = Integer.parseInt(firstnum);
+                int parsedsecondnum = Integer.parseInt(secondnum);
+                int result = 0;
+                switch (request.getParameter("submit")) {
+                    case "+":
+                        result = parsedfirstnum + parsedsecondnum;
+                        break;
+                    case "-":
+                        result = parsedfirstnum - parsedsecondnum;
+                        break;
+                    case "*":
+                        result = parsedfirstnum * parsedsecondnum;
+                        break;
+                    case "%":
+                        result = parsedfirstnum % parsedsecondnum;
+                        break;
+                }
+
+                request.setAttribute("result", result);
+
             }
+        } catch (NumberFormatException e) {
+            request.setAttribute("result", "invalid");
 
-            request.setAttribute("result", result);
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticCalculator.jsp")
+                    .forward(request, response);
 
+           return;
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticCalculator.jsp")
